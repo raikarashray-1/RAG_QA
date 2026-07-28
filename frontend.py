@@ -3,7 +3,7 @@ import requests
 
 API_URL = "http://127.0.0.1:8000/chat"
 
-st.title("Document RAG Assistant")
+st.title("RAG Assistant - Building Laws")
 
 # Show instructions at the top
 st.info("Ask me anything about the document, or type 'q', 'quit', or 'exit' to end the session.")
