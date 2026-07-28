@@ -5,8 +5,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 &
 
 echo "Waiting for FastAPI to initialize..."
 
-# Poll port 8000 until FastAPI returns a response
-until curl -s http://127.0.0.1:8000/ > /dev/null; do
+# Poll port 8000 using Python's built-in urllib
+until python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/')" 2>/dev/null; do
   sleep 2
 done
 
