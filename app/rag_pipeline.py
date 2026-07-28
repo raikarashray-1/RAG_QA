@@ -26,7 +26,7 @@ class RAGPipeline:
     def _get_embedding(self, text: str) -> list[float]:
         """Generates vector embeddings using Gemini's text-embedding model."""
         response = self.genai_client.models.embed_content(
-            model="text-embedding-001",
+            model="gemini-embedding-001",
             contents=text
         )
         return response.embeddings[0].values
