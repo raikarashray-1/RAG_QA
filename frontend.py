@@ -6,7 +6,7 @@ API_URL = "http://127.0.0.1:8000/chat"
 st.title("RAG Assistant - Building Laws")
 
 # Show instructions at the top
-st.info("Ask me anything about the document, or type 'q', 'quit', or 'exit' to end the session.")
+st.info("Ask me anything about Goa Building Regulations 2018, or type 'q', 'quit', or 'exit' to end the session.")
 
 # Initialize session states
 if "messages" not in st.session_state:
