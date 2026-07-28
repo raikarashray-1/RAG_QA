@@ -42,3 +42,8 @@ def chat_endpoint(request: QueryRequest):
         context=result["context"],
         is_exit=False
     )
+# app/main.py
+
+@app.get("/")
+def read_root():
+    return {"status": "ok"}
