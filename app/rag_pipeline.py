@@ -17,7 +17,7 @@ class RAGPipeline:
         self.file_path = file_path
         # Initialize Gemini GenAI client
         self.genai_client = genai.Client()
-        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+        self.llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite")
         
         # Build components
         self.collection = self._build_vector_store()
@@ -26,7 +26,7 @@ class RAGPipeline:
     def _get_embedding(self, text: str) -> list[float]:
         """Generates vector embeddings using Gemini's text-embedding model."""
         response = self.genai_client.models.embed_content(
-            model="text-embedding-004",
+            model="text-embedding-001",
             contents=text
         )
         return response.embeddings[0].values
