@@ -23,24 +23,30 @@ for message in st.session_state.messages:
 if st.session_state.session_active:
     if user_query := st.chat_input("Ask a question..."):
         
-        # Call FastAPI backend first
-        response = requests.post(API_URL, json={"query": user_query}).json()
+        # Call FastAPI backend
+        res = requests.post(API_URL, json={"query": user_query})
 
-        # IF USER EXIT: Only show the termination alert once
-        if response.get("is_exit"):
-            st.session_state.session_active = False
-            st.warning("👋 Chat session ended. Refresh the page to start a new chat.")
-            st.rerun()  # Instantly hides the input box
-        
-        # IF REGULAR QUESTION: Append user message & assistant reply to UI
-        else:
-            st.session_state.messages.append({"role": "user", "content": user_query})
-            st.session_state.messages.append({"role": "assistant", "content": response["answer"]})
+        if res.status_code == 200:
+            response = res.json()
+
+            # IF USER EXIT: Only show the termination alert once
+            if response.get("is_exit"):
+                st.session_state.session_active = False
+                st.warning("👋 Chat session ended. Refresh the page to start a new chat.")
+                st.rerun()  # Instantly hides the input box
             
-            with st.chat_message("user"):
-                st.markdown(user_query)
-            with st.chat_message("assistant"):
-                st.markdown(response["answer"])
+            # IF REGULAR QUESTION: Append user message & assistant reply to UI
+            else:
+                st.session_state.messages.append({"role": "user", "content": user_query})
+                st.session_state.messages.append({"role": "assistant", "content": response["answer"]})
+                
+                with st.chat_message("user"):
+                    st.markdown(user_query)
+                with st.chat_message("assistant"):
+                    st.markdown(response["answer"])
+        else:
+            # Display readable error message on screen instead of crashing
+            st.error(f"Backend Error ({res.status_code}): {res.text}")
 
 # 3. If session ended previously, display closed status banner
 else:
