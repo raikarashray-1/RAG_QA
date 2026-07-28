@@ -75,7 +75,7 @@ class RAGPipeline:
             query = state["query"]
             context = "\n\n".join(state["context"])
             
-            prompt = f"""You are a helpful assistant answering questions based on the document context.
+            prompt = f"""You are a helpful assistant answering questions based on Building Regulations of Goa.
             Context:
             {context}
             
