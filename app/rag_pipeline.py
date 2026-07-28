@@ -99,7 +99,11 @@ class RAGPipeline:
     def answer_query(self, query: str) -> dict:
         initial_state = {"query": query, "context": [], "generation": ""}
         result = self.graph.invoke(initial_state)
+        
+        generation = result.get("generation")
+        clean_answer = generation[0]["text"] if generation else "No answer generated."
+
         return {
-            "answer": result.get("generation", "No answer generated."),
+            "answer": clean_answer,
             "context": result.get("context", [])
         }
