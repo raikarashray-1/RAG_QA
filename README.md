@@ -1,2 +1,5 @@
 # RAG_QA
-RAG QA
+The App can answer questions based on the provided Goa Building Laws Book.
+Currently, I have prompted it to ask questions back to clarify and understand what the user is looking for.
+The app seems to ask additional questions after answering one, and it may confuse the user.
+The app also seems to have no conversational memory, asks the same question after a few turns.
