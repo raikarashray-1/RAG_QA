@@ -6,6 +6,7 @@ app = FastAPI(title="RAG QA API")
 
 class QueryRequest(BaseModel):
     query: str
+    thread_id: str
 
 class QueryResponse(BaseModel):
     answer: str
@@ -22,9 +23,13 @@ def startup_event():
 @app.post("/chat", response_model=QueryResponse)
 def chat_endpoint(request: QueryRequest):
     user_input = request.query.strip()
+    thread_id = request.thread_id.strip()
     
     if not user_input:
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
+    
+    if not thread_id:
+        raise HTTPException(status_code=400, detail="Thread ID cannot be empty.")
     
     # Check for exit commands
     if user_input.lower() in ["q", "quit", "exit"]:
@@ -35,8 +40,8 @@ def chat_endpoint(request: QueryRequest):
         )
     
     try:
-        # Run user query through the pre-loaded pipeline
-        result = rag_system.answer_query(user_input)
+        # Run user query through the pre-loaded pipeline with thread_id
+        result = rag_system.answer_query(query=user_input, thread_id=thread_id)
         
         # Ensure context is formatted safely as a list of strings
         raw_context = result.get("context", [])
@@ -58,7 +63,6 @@ def chat_endpoint(request: QueryRequest):
     except Exception as e:
         # Prevent 500 crash pages by returning a clean error payload
         raise HTTPException(status_code=500, detail=f"Pipeline error: {str(e)}")
-# app/main.py
 
 @app.get("/")
 def read_root():
