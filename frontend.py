@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import uuid
 
 API_URL = "http://127.0.0.1:8000/chat"
 
@@ -9,6 +10,8 @@ st.title("RAG Assistant - Building Laws")
 st.info("Ask me anything about Goa Building Regulations 2018, or type 'q' to end the session.")
 
 # Initialize session states
+if "thread_id" not in st.session_state:
+    st.session_state.thread_id = str(uuid.uuid4())
 if "messages" not in st.session_state:
     st.session_state.messages = []
 if "session_active" not in st.session_state:
@@ -23,8 +26,12 @@ for message in st.session_state.messages:
 if st.session_state.session_active:
     if user_query := st.chat_input("Ask a question..."):
         
-        # Call FastAPI backend
-        res = requests.post(API_URL, json={"query": user_query})
+        # Call FastAPI backend passing query AND thread_id
+        payload = {
+            "query": user_query,
+            "thread_id": st.session_state.thread_id
+        }
+        res = requests.post(API_URL, json=payload)
 
         if res.status_code == 200:
             response = res.json()
