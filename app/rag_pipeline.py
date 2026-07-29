@@ -19,7 +19,7 @@ class RAGPipeline:
     def __init__(self, file_path: str):
         self.file_path = file_path
         self.genai_client = genai.Client()
-        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash") # or your preferred Gemini model
+        self.llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite") # or your preferred Gemini model
         
         self.collection = self._build_vector_store()
         # Create an in-memory checkpointer for session state
