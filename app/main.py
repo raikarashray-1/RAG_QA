@@ -1,17 +1,15 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from app.rag_pipeline import RAGPipeline
 
 app = FastAPI(title="RAG QA API")
 
 class QueryRequest(BaseModel):
     query: str
-    session_id: str = Field(default="default_session", description="Unique session ID per user/conversation")
 
 class QueryResponse(BaseModel):
     answer: str
     context: list
-    session_id: str
     is_exit: bool = False
 
 rag_system = None
@@ -24,7 +22,6 @@ def startup_event():
 @app.post("/chat", response_model=QueryResponse)
 def chat_endpoint(request: QueryRequest):
     user_input = request.query.strip()
-    session_id = request.session_id.strip() or "default_session"
     
     if not user_input:
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
@@ -34,33 +31,34 @@ def chat_endpoint(request: QueryRequest):
         return QueryResponse(
             answer="Session ended. Thanks for chatting!",
             context=[],
-            session_id=session_id,
             is_exit=True
         )
     
     try:
-        # Pass both query and session_id to the pipeline
-        result = rag_system.answer_query(query=user_input, session_id=session_id)
+        # Run user query through the pre-loaded pipeline
+        result = rag_system.answer_query(user_input)
         
+        # Ensure context is formatted safely as a list of strings
         raw_context = result.get("context", [])
         formatted_context = []
         for item in raw_context:
             if isinstance(item, str):
                 formatted_context.append(item)
-            elif hasattr(item, "page_content"):
+            elif hasattr(item, "page_content"):  # LangChain Document
                 formatted_context.append(str(item.page_content))
             else:
                 formatted_context.append(str(item))
 
         return QueryResponse(
-            answer=result.get("answer", "No answer generated."),
+            answer=str(result.get("answer", "No answer generated.")),
             context=formatted_context,
-            session_id=session_id,
             is_exit=False
         )
         
     except Exception as e:
+        # Prevent 500 crash pages by returning a clean error payload
         raise HTTPException(status_code=500, detail=f"Pipeline error: {str(e)}")
+# app/main.py
 
 @app.get("/")
 def read_root():
