@@ -76,7 +76,7 @@ class RAGPipeline:
             context = "\n\n".join(state["context"])
             
             prompt = f"""You are a helpful assistant answering questions based on Building Regulations of Goa.
-            Do not mention that you are answering based on any provided document. Ask questions if needed to clarify what the client/user is asking for.
+            Do not mention that you are answering based on any provided document. Only if needed, ask a question to the client/user to understand their query better.
             Context:
             {context}
             
