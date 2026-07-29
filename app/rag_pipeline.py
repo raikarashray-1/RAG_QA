@@ -124,21 +124,21 @@ Context from Knowledge Base:
         return workflow.compile(checkpointer=self.memory)
 
     def answer_query(self, query: str, session_id: str) -> dict:
-        # LangGraph config uses thread_id to track separate sessions
         config = {"configurable": {"thread_id": session_id}}
-        
+    
         initial_state = {
             "messages": [HumanMessage(content=query)],
             "context": [],
             "standalone_query": ""
         }
-        
+    
         result = self.graph.invoke(initial_state, config=config)
-        
-        # Extract last AI message
+    
+        # Extract last AI message content
         last_message = result["messages"][-1]
-        
+        clean_answer = self._extract_plain_text(last_message.content)
+    
         return {
-            "answer": str(last_message.content),
+            "answer": clean_answer,
             "context": result.get("context", [])
         }
