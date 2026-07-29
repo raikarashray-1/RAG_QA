@@ -27,11 +27,15 @@ class RAGPipeline:
         self.graph = self._build_langgraph()
 
     def _get_embedding(self, text: str) -> list[float]:
+        """Generates vector embeddings using Gemini's text-embedding model."""
+        # Ensure text is clean plain string
+        clean_text = self._extract_plain_text(text)
+    
         response = self.genai_client.models.embed_content(
             model="gemini-embedding-001",
-            contents=text
+            contents=clean_text
         )
-        return response.embeddings[0].values
+    return response.embeddings[0].values
 
     def _build_vector_store(self):
         with open(self.file_path, "r", encoding="utf-8") as f:
@@ -60,20 +64,20 @@ class RAGPipeline:
 
     def _build_langgraph(self):
         # 1. Reformulate incoming follow-ups into a standalone question for retrieval
-        def contextualize_query_node(state: RAGState) -> dict:
-            messages = state["messages"]
-            if len(messages) <= 1:
-                return {"standalone_query": messages[-1].content}
-
-            system_prompt = (
-                "Given a chat history and the latest user prompt which might reference context in the chat history, "
-                "formulate a standalone question that can be understood without the chat history. "
-                "Do NOT answer the question, just reformulate it if needed and otherwise return it as is."
-            )
-            
-            prompt_messages = [SystemMessage(content=system_prompt)] + messages
-            response = self.llm.invoke(prompt_messages)
-            return {"standalone_query": response.content}
+    def _extract_plain_text(self, content_field) -> str:
+        """Helper to convert str, list of dicts, or Message content into a clean string."""
+        if isinstance(content_field, str):
+            return content_field
+        elif isinstance(content_field, list):
+            # Extract text from [{'type': 'text', 'text': '...'}] structure
+            text_parts = []
+            for part in content_field:
+                if isinstance(part, dict) and "text" in part:
+                    text_parts.append(part["text"])
+                elif isinstance(part, str):
+                    text_parts.append(part)
+            return " ".join(text_parts)
+        return str(content_field)
 
         # 2. Retrieve vectors based on the standalone query
         def retrieve_node(state: RAGState) -> dict:
