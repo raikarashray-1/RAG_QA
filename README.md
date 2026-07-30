@@ -7,7 +7,7 @@ The app also seems to have no conversational memory, asks the same question afte
 Instead of generating embeddings on every restart, embeddings for the document can be saved here.</br>
 Also add, BM25 and Dense Vectors to increase weight for less occurring yet essential keywords like code references etc. 
 
-# Title
+# RAG QA - For Building Regulations Goa
 
 2-3 sentence summary, who it is for, what problem it solves, make it catchy
 
