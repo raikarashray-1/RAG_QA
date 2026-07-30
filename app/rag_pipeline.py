@@ -51,8 +51,8 @@ class RAGPipeline:
             ids=[item["id"] for item in data],
             documents=[item["text"] for item in data],
             embeddings=[item["embedding"] for item in data]
-            )   
-         return collection  # Must return the collection!
+        )   
+        return collection  # Must return the collection!
 
     def _build_langgraph(self):
         # Define internal node functions
