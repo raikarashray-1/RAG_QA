@@ -7,6 +7,7 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 import chromadb
+import json
 from google import genai  # Google GenAI SDK
 
 # Define the State for LangGraph including chat history messages
@@ -37,30 +38,21 @@ class RAGPipeline:
         return response.embeddings[0].values
 
     def _build_vector_store(self):
-        with open(self.file_path, "r", encoding="utf-8") as f:
-            markdown_content = f.read()
-
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=100,
-            separators=["\n## ", "\n### ", "\n\n", "\n", " "]
-        )
-
-        chunks = text_splitter.split_text(markdown_content)
-        
-        # Create Chroma collection
+        # 1. Create in-memory Chroma instance
         chroma_client = chromadb.Client()
         collection = chroma_client.get_or_create_collection(name="markdown_rag")
 
-        embeddings = [self._get_embedding(chunk) for chunk in chunks]
-        ids = [f"chunk_{i}" for i in range(len(chunks))]
+        # 2. Load pre-computed embeddings from root folder
+        with open("embeddings.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
 
+        # 3. Populate collection instantly (takes under 1 second, zero API costs)
         collection.add(
-            documents=chunks,
-            embeddings=embeddings,
-            ids=ids
-        )
-        return collection  # Must return the collection!
+            ids=[item["id"] for item in data],
+            documents=[item["text"] for item in data],
+            embeddings=[item["embedding"] for item in data]
+        )   
+         return collection  # Must return the collection!
 
     def _build_langgraph(self):
         # Define internal node functions
