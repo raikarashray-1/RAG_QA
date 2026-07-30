@@ -43,7 +43,7 @@ class RAGPipeline:
         collection = chroma_client.get_or_create_collection(name="markdown_rag")
 
         # 2. Load pre-computed embeddings from root folder
-        with open("embeddings.json", "r", encoding="utf-8") as f:
+        with open(self.file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         # 3. Populate collection instantly (takes under 1 second, zero API costs)
