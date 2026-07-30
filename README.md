@@ -5,3 +5,4 @@ The app seems to ask additional questions after answering one, and it may confus
 The app also seems to have no conversational memory, asks the same question after a few turns.</br>
 </br>
 Instead of generating embeddings on every restart, embeddings for the document can be saved here.</br>
+Also add, BM25 and Dense Vectors to increase weight for less occurring yet essential keywords like code references etc. 
