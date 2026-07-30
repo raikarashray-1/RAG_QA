@@ -18,7 +18,7 @@ rag_system = None
 @app.on_event("startup")
 def startup_event():
     global rag_system
-    rag_system = RAGPipeline(file_path="knowledge_base.md")
+    rag_system = RAGPipeline(file_path="embeddings.json")
 
 @app.post("/chat", response_model=QueryResponse)
 def chat_endpoint(request: QueryRequest):
