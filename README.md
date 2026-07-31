@@ -64,7 +64,7 @@ Instead of searching through dense legal texts and planning documents, users can
 ---
 
 ## 📁 Repository Structure
-'''
+'''text
 rag-portfolio-app/
 ├── app/
 │   ├── __init__.py
