@@ -9,7 +9,7 @@ Also add, BM25 and Dense Vectors to increase weight for less occurring yet essen
 
 # 🏛️ Goa Building Regulations AI - RAG Assistant
 
-An AI-powered Retrieval-Augmented Generation (RAG) application designed to help architects, urban planners, builders, and homebuilders effortlessly navigate and understand the official **Goa Building Regulations**. 
+An AI-powered Retrieval-Augmented Generation (RAG) application designed to help architects, urban planners, and builders, effortlessly navigate and understand the official **Goa Building Regulations**. 
 
 Instead of searching through dense legal texts and planning documents, users can ask natural language questions and receive accurate, context-aware answers backed by source citations.
 
@@ -18,7 +18,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 ## 🌟 Key Features
 
-* **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), coverage, height restrictions, and zoning rules in Goa.
+* **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), coverage, height restrictions, or zoning rules in Goa.
 * **Context-Aware Answers:** Utilizes RAG with ChromaDB to pull precise excerpts from the Markdown-formatted Goa Building Regulations.
 * **LangGraph Orchestration:** Stateful, flexible Graph-based workflow for retrieval, query processing, and response generation.
 * **Streamlit UI:** Clean, intuitive chat interface for seamless interactive user experience.
@@ -59,7 +59,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 1. **Document Ingestion:** The Goa Building Regulations Markdown document is chunked and embedded into **ChromaDB**.
 2. **Retrieval Graph:** When a user submits a query, **LangGraph** coordinates retrieving top relevant document chunks from ChromaDB and piping them into the LLM context.
-3. **Response Generation:** The LLM synthesizes a concise, legally accurate answer based *strictly* on the retrieved context.
+3. **Response Generation:** The LLM synthesizes a concise, legally accurate answer based strictly on the retrieved context.
 
 ---
 
@@ -71,30 +71,31 @@ rag-portfolio-app/
 │   ├── rag_pipeline.py   # LangChain, LangGraph & Gemini logic
 │   └── main.py           # FastAPI server
 ├── frontend.py           # Streamlit app
-├── knowledge_base.md     # Your markdown document
+├── knowledge_base.md     # The markdown document
+├── embeddings.json       # Preprocessed embeddings database (added later) to avoid regeneration on every restart
 ├── requirements.txt
 ├── start.sh              # Shell script to start both processes
-└── Dockerfile            # Hugging Face container build instructions
+└── Dockerfile            # Render container build instructions
 ```
 
-## ⚙️ Getting Started (or how to use the app)
-
+## ⚙️ How to use the app
 Sample Queries:
-1.
-2.
+1. For a sloping site how is the building height measured?
+2. What is the FAR for residential plots?
+3. Is there a limit to the size of a bathroom?
 
 ---
 
 ## 🧠 Technical Challenges & Learnings
 
-* **The Challenge**: Detail a tough bug, performance bottleneck, or architecture problem.
-* **The Solution**: Explain how you diagnosed it and the specific tool or algorithm used to fix it.
-* **Key Takeaway**: Share what you learned about system design, optimization, or clean code.
+Previous version of the code read a markdown file, and created embeddings each time the app restarted. To prevent token limit hits, and save time, the document
+was separately processed for extracting embeddings. The code has been updated to take embeddings directly from embeddings.json instead of the markdown file.
+
 ---
 
 ## ✉️ Contact
 
-* **Name**: Your Full Name
-* **LinkedIn**: [@yourhandle](https://linkedin.com)
-* **Email**: your.email@example.com
-* **GitHub Profile**: [://github.com](https://://github.com)
+* **Name**: Ashray Raikar
+* **LinkedIn**: [https://linkedin.com](http://www.linkedin.com/in/ashray-raikar-117b24119)
+* **Email**: ashrayraikar@gmail.com
+* **GitHub Profile**: [github.com)](https://github.com/raikarashray-1)
