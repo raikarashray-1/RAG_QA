@@ -14,7 +14,7 @@ An AI-powered Retrieval-Augmented Generation (RAG) application designed to help 
 Instead of searching through dense legal texts and planning documents, users can ask natural language questions and receive accurate, context-aware answers backed by source citations.
 
 ---
-👉 **[Live Demo Link](https://your-live-demo.com)** | 📁 **[Design/Figma Link](https://figma.com)**
+👉 **[Live Demo Link](https://www.loom.com/share/85ab2e904eb649bc9b6c46d0403af5dd)**
 
 ## 🌟 Key Features
 
@@ -29,15 +29,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 ## 📸 Screenshots & Demos
 
-### Desktop Preview
-![Desktop View](https://placeholder.com)
-
-### Mobile & Core Flow
-
-| Interactive Preview | Main Dashboard |
-| :---: | :---: |
-| ![GIF Demo](https://placeholder.com) | ![Mobile Screen](https://placeholder.com) |
-
+![Project Screenshot](images/screenshot.png)
 
 ---
 
