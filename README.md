@@ -70,9 +70,11 @@ rag-portfolio-app/
 │   ├── __init__.py
 │   ├── rag_pipeline.py   # LangChain, LangGraph & Gemini logic
 │   └── main.py           # FastAPI server
-├── frontend.py           # Streamlit or Gradio app
+├── frontend.py           # Streamlit app
+├── knowledge_base.md     # Your markdown document
 ├── requirements.txt
-└── README.md
+├── start.sh              # Shell script to start both processes
+└── Dockerfile            # Hugging Face container build instructions
 ```
 
 ## ⚙️ Getting Started (or how to use the app)
