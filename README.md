@@ -73,6 +73,7 @@ rag-portfolio-app/
 ├── frontend.py           # Streamlit or Gradio app
 ├── requirements.txt
 └── README.md
+```
 
 ## ⚙️ Getting Started (or how to use the app)
 
