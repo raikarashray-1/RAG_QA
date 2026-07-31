@@ -18,7 +18,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 ## 🌟 Key Features
 
-* **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), coverage, height restrictions, or zoning rules in Goa.
+* **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), height restrictions, or zoning rules in Goa.
 * **Context-Aware Answers:** Utilizes RAG with ChromaDB to pull precise excerpts from the Markdown-formatted Goa Building Regulations.
 * **LangGraph Orchestration:** Stateful, flexible Graph-based workflow for retrieval, query processing, and response generation.
 * **Streamlit UI:** Clean, intuitive chat interface for seamless interactive user experience.
