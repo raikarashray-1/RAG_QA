@@ -65,6 +65,14 @@ Instead of searching through dense legal texts and planning documents, users can
 
 ## 📁 Repository Structure
 
+rag-portfolio-app/
+├── app/
+│   ├── __init__.py
+│   ├── rag_pipeline.py   # LangChain, LangGraph & Gemini logic
+│   └── main.py           # FastAPI server
+├── frontend.py           # Streamlit or Gradio app
+├── requirements.txt
+└── README.md
 
 
 ## ⚙️ Getting Started (or how to use the app)
