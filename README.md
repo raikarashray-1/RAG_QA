@@ -96,6 +96,6 @@ was separately processed for extracting embeddings. The code has been updated to
 ## ✉️ Contact
 
 * **Name**: Ashray Raikar
-* **LinkedIn**: [https://linkedin.com](http://www.linkedin.com/in/ashray-raikar-117b24119)
+* **LinkedIn**: [linkedin.com](http://www.linkedin.com/in/ashray-raikar-117b24119)
 * **Email**: ashrayraikar@gmail.com
 * **GitHub Profile**: [github.com](https://github.com/raikarashray-1)
