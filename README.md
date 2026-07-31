@@ -29,7 +29,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 ## 📸 Screenshots & Demos
 
-![Project Screenshot](images/screenshot.png)
+![Project Screenshot](screenshot.png)
 
 ---
 
