@@ -7,17 +7,23 @@ The app also seems to have no conversational memory, asks the same question afte
 Instead of generating embeddings on every restart, embeddings for the document can be saved here.</br>
 Also add, BM25 and Dense Vectors to increase weight for less occurring yet essential keywords like code references etc. 
 
-# RAG QA - For Building Regulations Goa
+# 🏛️ Goa Building Regulations AI - RAG Assistant
 
-2-3 sentence summary, who it is for, what problem it solves, make it catchy
+An AI-powered Retrieval-Augmented Generation (RAG) application designed to help architects, urban planners, builders, and homebuilders effortlessly navigate and understand the official **Goa Building Regulations**. 
 
+Instead of searching through dense legal texts and planning documents, users can ask natural language questions and receive accurate, context-aware answers backed by source citations.
+
+---
 👉 **[Live Demo Link](https://your-live-demo.com)** | 📁 **[Design/Figma Link](https://figma.com)**
 
 ## 🌟 Key Features
 
-* **Feature One**: Describe a critical component or user capability.
-* **Feature Two**: Highlight a complex technical choice or user flow.
-* **Feature Three**: Mention performance optimization or database management.
+* **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), coverage, height restrictions, and zoning rules in Goa.
+* **Context-Aware Answers:** Utilizes RAG with ChromaDB to pull precise excerpts from the Markdown-formatted Goa Building Regulations.
+* **LangGraph Orchestration:** Stateful, flexible Graph-based workflow for retrieval, query processing, and response generation.
+* **Streamlit UI:** Clean, intuitive chat interface for seamless interactive user experience.
+* **FastAPI Backend:** Lightweight, high-performance asynchronous RESTful API serving the RAG workflow.
+* **Containerized & Deployed:** Fully containerized using Docker and deployed on Render for continuous accessibility.
 
 ---
 
@@ -37,17 +43,35 @@ Also add, BM25 and Dense Vectors to increase weight for less occurring yet essen
 
 ## 🛠️ Tech Stack
 
-* **Frontend**: React, Tailwind CSS, TypeScript
-* **Backend**: Node.js, Express, GraphQL
-* **Database**: PostgreSQL, Prisma ORM
-* **Deployment**: Vercel, AWS S3
+| Component | Technology Used |
+| :--- | :--- |
+| **Frontend** | Streamlit |
+| **Backend API** | FastAPI, Uvicorn |
+| **Orchestration** | LangGraph, LangChain |
+| **Vector Store** | Chroma DB |
+| **LLM & Embeddings** | Gemini |
+| **Containerization** | Docker |
+| **Deployment** | Render |
 
 ---
 
+## 🏗️ System Architecture
+
+1. **Document Ingestion:** The Goa Building Regulations Markdown document is chunked and embedded into **ChromaDB**.
+2. **Retrieval Graph:** When a user submits a query, **LangGraph** coordinates retrieving top relevant document chunks from ChromaDB and piping them into the LLM context.
+3. **Response Generation:** The LLM synthesizes a concise, legally accurate answer based *strictly* on the retrieved context.
+
+---
+
+## 📁 Repository Structure
+
+
+
 ## ⚙️ Getting Started (or how to use the app)
 
-Follow these steps to set up the project locally.
-
+Sample Queries:
+1.
+2.
 
 ---
 
