@@ -1,3 +1,4 @@
+# Most of the Code is AI generated, steps commented
 import streamlit as st
 import requests
 import uuid
