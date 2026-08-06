@@ -11,7 +11,7 @@ Instead of searching through dense legal texts and planning documents, users can
 
 * **Natural Language Queries:** Ask plain-English questions about setbacks, FAR (Floor Area Ratio), height restrictions, or zoning rules in Goa.
 * **Context-Aware Answers:** Utilizes RAG with ChromaDB to pull precise excerpts from the Markdown-formatted Goa Building Regulations.
-* **LangGraph Orchestration:** Stateful, flexible Graph-based workflow for retrieval, query processing, and response generation.
+* **LangGraph Orchestration:** Stateful, flexible Graph-based workflow for retrieval, query processing, response generation, and future upgrades.
 * **Streamlit UI:** Clean, intuitive chat interface for seamless interactive user experience.
 * **FastAPI Backend:** Lightweight, high-performance asynchronous RESTful API serving the RAG workflow.
 * **Containerized & Deployed:** Fully containerized using Docker and deployed on Render for continuous accessibility.
