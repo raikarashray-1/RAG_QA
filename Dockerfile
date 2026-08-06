@@ -1,3 +1,4 @@
+# Most of the Code is AI generated, steps commented
 # Base Python image
 FROM python:3.10-slim
 
