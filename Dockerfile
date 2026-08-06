@@ -5,7 +5,7 @@ FROM python:3.10-slim
 ENV PYTHONUNBUFFERED=1 \
     DEBIAN_FRONTEND=noninteractive
 
-# Create a non-root user (Hugging Face requirement)
+# Create a non-root user for Render or Hugging Face
 RUN useradd -m -u 1000 user
 USER user
 ENV PATH="/home/user/.local/bin:$PATH"
@@ -24,7 +24,7 @@ COPY --chown=user . .
 # Ensure start.sh is executable
 RUN chmod +x start.sh
 
-# Expose port 7860 for Hugging Face
+# Expose port 7860 for Render
 EXPOSE 7860
 
 # Command to execute on container launch
