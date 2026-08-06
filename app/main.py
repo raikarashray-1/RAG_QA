@@ -1,3 +1,4 @@
+# Most of the Code is AI generated, steps commented
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from app.rag_pipeline import RAGPipeline
