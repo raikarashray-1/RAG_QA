@@ -1,3 +1,4 @@
+# Most of the Code is AI generated, steps commented
 import os
 from typing import TypedDict, List, Annotated
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -42,7 +43,7 @@ class RAGPipeline:
         chroma_client = chromadb.Client()
         collection = chroma_client.get_or_create_collection(name="markdown_rag")
 
-        # 2. Load pre-computed embeddings from root folder
+        # 2. Load pre-computed embeddings from root folder (previous version of code generated embeddings each time app restarted, this skips the process)
         with open(self.file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
