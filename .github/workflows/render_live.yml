@@ -1,0 +1,16 @@
+name: Render Daytime Keep-Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes, Monday to Friday, between 9:00 AM and 7:00 PM (19:00) UTC
+    # Adjust hours based on your target time zone
+    - cron: '*/10 3-13 * * 1-5'
+  workflow_dispatch: # Allows you to manually trigger the ping from GitHub UI to test it
+
+jobs:
+  ping-render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP request to Render app
+        run: |
+          curl -s -f -o /dev/null https://rag-qa-x4od.onrender.com/healthz
