@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs every 10 minutes, Monday to Friday, between 9:00 AM and 7:00 PM (19:00) UTC
     # Adjust hours based on your target time zone
-    - cron: '*/10 3-13 * * 1-5'
+    - cron: '*/5 3-13 * * 1-5'
   workflow_dispatch: # Allows you to manually trigger the ping from GitHub UI to test it
 
 jobs:
