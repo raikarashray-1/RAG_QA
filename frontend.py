@@ -11,6 +11,19 @@ st.set_page_config(
 
 API_URL = "http://127.0.0.1:8000/chat"
 
+# --- Error Handler Helper ---
+def handle_error(error_source: str):
+    """Maps raw error/response text to user-friendly messages."""
+    text_lower = str(error_source).lower()
+
+    if "rate limit" in text_lower:
+        st.error("Looks like traffic is high right now! Please wait a moment and try again.")
+    elif "quota" in text_lower or "token" in text_lower:
+        st.error("We've temporarily reached our processing capacity. Please check back soon.")
+    else:
+        st.error("Something went wrong on our end. Please try again later.")
+
+
 # --- Sidebar: Purpose & Controls ---
 with st.sidebar:
     st.header("About This Tool 🏛️")
@@ -78,10 +91,12 @@ if st.session_state.session_active:
                     with st.chat_message("assistant"):
                         st.markdown(bot_answer)
             else:
-                st.error(f"Backend Error ({res.status_code}): {res.text}")
+                # Intercept non-200 responses from API
+                handle_error(res.text)
 
         except requests.exceptions.RequestException as e:
-            st.error(f"Failed to connect to backend service: {e}")
+            # Intercept request/connection exceptions
+            handle_error(e)
 
 # 3. Session ended notice
 else:
