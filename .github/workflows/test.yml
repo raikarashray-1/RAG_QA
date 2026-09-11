@@ -35,4 +35,4 @@ jobs:
           GOOGLE_API_KEY: "dummy_key_for_ci"
           PYTHONPATH: .
         run: |
-          python -m pytest tests/ -v --tb=short
+          python -m pytest -v
