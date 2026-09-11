@@ -1,6 +1,7 @@
 import pytest
 import json
 from unittest.mock import patch, MagicMock
+from langchain_core.messages import AIMessage
 from app.rag_pipeline import RAGPipeline
 
 @pytest.fixture
@@ -43,15 +44,12 @@ def test_get_embedding(mock_chat, mock_genai, mock_embeddings_json):
 @patch("app.rag_pipeline.genai.Client")
 @patch("app.rag_pipeline.ChatGoogleGenerativeAI")
 def test_answer_query_mocked(mock_chat, mock_genai, mock_embeddings_json):
-    """Test full execution graph using mock LLM response."""
-    # Setup mock LLM invocation result
+# Use real AIMessage instead of MagicMock for response content
     mock_llm_instance = MagicMock()
-    mock_llm_response = MagicMock()
-    mock_llm_response.content = "Building height limit is 12 meters."
-    mock_llm_instance.invoke.return_value = mock_llm_response
+    mock_llm_instance.invoke.return_value = AIMessage(content="Building height limit is 12 meters.")
     mock_chat.return_value = mock_llm_instance
 
-    # Setup mock embedding client
+    # Mock Gemini embedding client
     mock_genai_instance = MagicMock()
     mock_embed_response = MagicMock()
     mock_embed_response.embeddings[0].values = [0.1, 0.2, 0.3]
